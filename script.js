@@ -186,7 +186,7 @@ async function login() {
     const token = response.data.token;
     localStorage.setItem("authToken", token);
 
-    location.href = "https://miniproject-cdyh2e9hfg5hlrsprwk42p.streamlit.app/"; // Redirect on success
+    location.href = "./home.html"; // Redirect on success
   } catch (error) {
     let errorMessage;
     try {

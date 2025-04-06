@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cineverse</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        position: relative;
+        background: linear-gradient(135deg, #0c0c0c, #1a1a1a);
+        color: #e5e5e5;
+        font-family: "Inter", sans-serif;
+        padding: 3rem 1rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .cineverse-title {
+        font-size: 4rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #ff00cc, #3333ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .username-display {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        color: #a3e635;
+      }
+
+      .content-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 3rem;
+        justify-content: center;
+        max-width: 1200px;
+        width: 100%;
+      }
+
+      .iframe-container {
+        flex: 1;
+        max-width: 600px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 35px rgba(255, 0, 200, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .iframe-container:hover {
+        transform: scale(1.03);
+        box-shadow: 0 16px 45px rgba(51, 51, 255, 0.4);
+      }
+
+      video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .info-container {
+        flex: 1;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+
+      .info-container h2 {
+        font-size: 2rem;
+        color: #ff00cc;
+      }
+
+      .info-container p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #ccc;
+      }
+
+      .techstack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .tech-card {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.7rem 1rem;
+        border-radius: 12px;
+        font-weight: 600;
+        background-color: #333;
+        color: white;
+        min-width: 120px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .tech-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(255, 0, 200, 0.3);
+      }
+
+      .tech-card img {
+        width: 24px;
+        height: 24px;
+      }
+
+      /* Brand colors */
+      .Python {
+        background-color: #3776ab;
+      }
+      .HTML {
+        background-color: #e34f26;
+      }
+      .CSS {
+        background-color: #264de4;
+      }
+      .JavaScript {
+        background-color: #f7df1e;
+        color: #000;
+      }
+      .Express {
+        background-color: #000000;
+      }
+      .Zod {
+        background-color: #3f51b5;
+      }
+      .JWT {
+        background-color: #ea580c;
+      }
+
+      .button {
+        margin-top: 3rem;
+        background: linear-gradient(90deg, #ff00cc, #3333ff);
+        color: white;
+        padding: 14px 36px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(255, 0, 200, 0.3);
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(51, 51, 255, 0.4);
+      }
+      .username-display {
+        margin-bottom: 1rem;
+        font-size: 2.2rem;
+        color: #a3e635;
+        width: 100%;
+        text-align: right;
+        padding-right: 1.5rem;
+        padding-bottom: 32px;
+      }
+
+      @media (max-width: 768px) {
+        .content-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cineverse-title {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="cineverse-title">Cineverse</h1>
+    <div class="username-display" id="username"></div>
+
+    <div class="content-container">
+      <div class="iframe-container">
+        <video autoplay loop muted playsinline>
+          <source src="miniVideo.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div class="info-container">
+        <h2>Recommendation System</h2>
+        <p>
+          Recommendation systems help users discover personalized content based
+          on their preferences, behavior, and interactions.
+        </p>
+        <p>
+          They power features in platforms like YouTube, Netflix, and Amazon to
+          enhance user experience and engagement.
+        </p>
+
+        <div class="techstack">
+          <div class="tech-card Python">
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+              alt="Python"
+            />
+            Python
+          </div>
+          <div class="tech-card HTML">
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+              alt="HTML"
+            />
+            HTML
+          </div>
+          <div class="tech-card CSS">
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+              alt="CSS"
+            />
+            CSS
+          </div>
+          <div class="tech-card JavaScript">
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+              alt="JavaScript"
+            />
+            JavaScript
+          </div>
+          <div class="tech-card Express">
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+              alt="Express"
+            />
+            Express
+          </div>
+          <div class="tech-card Zod">
+            <img
+              src="https://raw.githubusercontent.com/colinhacks/zod/main/logo.svg"
+              alt="Zod"
+            />
+            Zod
+          </div>
+          <div class="tech-card JWT">
+            <img src="https://jwt.io/img/pic_logo.svg" alt="JWT" /> JWT
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a
+      href="https://miniproject-cdyh2e9hfg5hlrsprwk42p.streamlit.app/"
+      class="button"
+      >Dive In</a
+    >
+
+    <script>
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        try {
+          const decoded = jwt_decode(token);
+          const username =
+            decoded?.username || decoded?.userid || decoded?.email;
+          if (username) {
+            document.getElementById(
+              "username"
+            ).textContent = `Welcome, ${username}`;
+          }
+        } catch (e) {
+          console.warn("Invalid token in localStorage");
+        }
+      }
+    </script>
+  </body>
+</html>
